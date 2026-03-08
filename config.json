@@ -1,0 +1,6 @@
+{
+  "Promt": "Review the code in this git patch for code quality, potential bugs, security issues, and adherence to best practices",
+  "Language": "ru",
+
+  "CustomPromt": ""
+}
