@@ -1,0 +1,12 @@
+{
+  "model": "stepfun/step-3.5-flash:free",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Plese print the in the russian language."
+    }
+  ],
+  "reasoning": {
+    "enabled": true
+  }
+}

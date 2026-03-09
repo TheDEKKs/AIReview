@@ -7,8 +7,8 @@ import (
 )
 
 type Config struct {
-	TokenAPI string `env:"TOKEN_API,required"`
- }
+	KeyAPI string `env:"TOKEN_API,notEmpty"`
+}
 
 
 func (s *Config) Load() {
