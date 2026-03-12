@@ -24,7 +24,7 @@ type RequestBody struct {
     Reasoning Reasoning `json:"reasoning"`
 }
 
-func Request(cod string) error {
+func Request(cod, SupplementationPromtString string, CustomPromt bool) error {
 	client := &http.Client{}
 
 	jsonData, err := os.Open("internal/api/test.json")
@@ -48,8 +48,12 @@ func Request(cod string) error {
 	}
 
 	requestBody.Messages[0].Content += cod
-	requestBody.Messages[0].Content += configJSON.Promt + configJSON.Language + configJSON.CustomPromt
 
+	if CustomPromt {
+		requestBody.Messages[0].Content += configJSON.CustomPromt + " " + SupplementationPromtString + " " + fmt.Sprintf("Reply in - Language %s", configJSON.Language)
+	} else {
+			requestBody.Messages[0].Content += configJSON.Promt + " " +  fmt.Sprintf("Reply in - Language %s", configJSON.Language) + " " + SupplementationPromtString
+	}
 	req, err := http.NewRequest(
 		"POST", "https://openrouter.ai/api/v1/chat/completions", jsonData,
 	)
