@@ -6,6 +6,7 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"bytes"
 	"thedekk/AIReview/internal/config"
 	"thedekk/AIReview/internal/env"
 )
@@ -50,12 +51,19 @@ func Request(cod, SupplementationPromtString string, CustomPromt bool) error {
 	requestBody.Messages[0].Content += cod
 
 	if CustomPromt {
-		requestBody.Messages[0].Content += configJSON.CustomPromt + " " + SupplementationPromtString + " " + fmt.Sprintf("Reply in - Language %s", configJSON.Language)
+		requestBody.Messages[0].Content += configJSON.CustomPromt + " " + SupplementationPromtString + " " + fmt.Sprintf("Answer the %s Language", configJSON.Language)
 	} else {
-			requestBody.Messages[0].Content += configJSON.Promt + " " +  fmt.Sprintf("Reply in - Language %s", configJSON.Language) + " " + SupplementationPromtString
+			requestBody.Messages[0].Content += configJSON.Promt + " " +  fmt.Sprintf("Answer the %s Language", configJSON.Language) + " " + SupplementationPromtString
 	}
+
+	resultJSON, err := json.Marshal(requestBody)
+	if err != nil {
+		fmt.Println("Error marshaling JSON:", err)
+		return err
+	}
+
 	req, err := http.NewRequest(
-		"POST", "https://openrouter.ai/api/v1/chat/completions", jsonData,
+		"POST", "https://openrouter.ai/api/v1/chat/completions", bytes.NewBuffer(resultJSON),
 	)
 	if err != nil {
 		fmt.Println("Error creating request:", err)

@@ -20,7 +20,7 @@ func main () {
 
 	fmt.Println(*CurrentBranch, *MainBranch, *CustomPromt, *OutFile, SupplementationPromtString)
 
-	if err :=	handlers.Request(); err != nil {
+	if err :=	handlers.Request(*CurrentBranch, *MainBranch, *CustomPromt, *OutFile, SupplementationPromtString); err != nil {
 		fmt.Println("Error:", err)
 	}
 }
