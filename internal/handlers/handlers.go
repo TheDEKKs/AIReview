@@ -2,7 +2,7 @@ package handlers
 
 import "thedekk/AIReview/internal/api"
 
-func Test() error {
+func Request() error {
 	if err := api.Test(); err != nil {
 		return err
 	}

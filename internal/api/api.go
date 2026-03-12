@@ -1,14 +1,30 @@
 package api
 
 import (
-	"net/http"
-	"io"
-	"os"
+	"encoding/json"
 	"fmt"
+	"io"
+	"net/http"
+	"os"
+	"thedekk/AIReview/internal/config"
 	"thedekk/AIReview/internal/env"
 )
 
-func Test() error {
+type Message struct {
+    Role    string `json:"role"`
+    Content string `json:"content"`
+}
+
+type Reasoning struct {
+    Enabled bool `json:"enabled"`
+}
+type RequestBody struct {
+    Model     string    `json:"model"`
+    Messages  []Message `json:"messages"`
+    Reasoning Reasoning `json:"reasoning"`
+}
+
+func Request(cod string) error {
 	client := &http.Client{}
 
 	jsonData, err := os.Open("internal/api/test.json")
@@ -18,6 +34,21 @@ func Test() error {
 	}
 
 	defer jsonData.Close()
+
+	var requestBody RequestBody
+	if err := json.NewDecoder(jsonData).Decode(&requestBody); err != nil {
+		fmt.Println("Error decoding JSON:", err)
+		return err
+	}
+
+	configJSON, err := config.LoadConfig()
+	if err != nil {
+		fmt.Println("Error loading config:", err)
+		return err
+	}
+
+	requestBody.Messages[0].Content += cod
+	requestBody.Messages[0].Content += configJSON.Promt + configJSON.Language + configJSON.CustomPromt
 
 	req, err := http.NewRequest(
 		"POST", "https://openrouter.ai/api/v1/chat/completions", jsonData,

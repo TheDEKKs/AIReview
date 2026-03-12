@@ -1,6 +1,6 @@
 {
-  "Promt": "Review the code in this git patch for code quality, potential bugs, security issues, and adherence to best practices",
-  "Language": "ru",
+  "Promt": " Review this git patch as a senior engineer. For every issue found, state: the file & line, severity (Critical/High/Medium/Low), what the problem is, and how to fix it with a code snippet. Focus only on problems — bugs, security flaws, performance issues, bad practices. Skip any praise. Reply in - Language.",
+  "Language": " ru",
 
   "CustomPromt": ""
 }
