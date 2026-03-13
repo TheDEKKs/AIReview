@@ -18,11 +18,11 @@ go build -o aireview ./cmd/main.go
 ## Flags
 | Flag | Type | Default | Description |
 |------|------|---------|-------------|
-| `-cb` | string | — | Current Branch |
-| `-cp` | bool | `false` | Custom Prompt |
-| `-mb` | string | `main` | Main Branch |
-| `-o` | string | `a.md` | Out File |
-| `-sp` | string | — | Supplementation Prompt |
+| `cb` | string | — | Current Branch |
+| `cp` | bool | `false` | Custom Prompt |
+| `mb` | string | `main` | Main Branch |
+| `o` | string | `a.md` | Out File |
+| `sp` | string | — | Supplementation Prompt |
 
 ## Usage
 ```bash
