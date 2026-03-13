@@ -11,19 +11,6 @@ import (
 	"thedekk/AIReview/internal/env"
 )
 
-type Message struct {
-    Role    string `json:"role"`
-    Content string `json:"content"`
-}
-
-type Reasoning struct {
-    Enabled bool `json:"enabled"`
-}
-type RequestBody struct {
-    Model     string    `json:"model"`
-    Messages  []Message `json:"messages"`
-    Reasoning Reasoning `json:"reasoning"`
-}
 
 func Request(cod, SupplementationPromtString string, CustomPromt bool) error {
 	client := &http.Client{}
@@ -51,10 +38,12 @@ func Request(cod, SupplementationPromtString string, CustomPromt bool) error {
 	requestBody.Messages[0].Content += cod
 
 	if CustomPromt {
-		requestBody.Messages[0].Content += configJSON.CustomPromt + " " + SupplementationPromtString + " " + fmt.Sprintf("Answer the %s Language", configJSON.Language)
+		requestBody.Messages[0].Content += configJSON.CustomPromt + " " + SupplementationPromtString + " " + fmt.Sprintf("YOU HAVE TO Answer the %s Language", configJSON.Language)
 	} else {
-			requestBody.Messages[0].Content += configJSON.Promt + " " +  fmt.Sprintf("Answer the %s Language", configJSON.Language) + " " + SupplementationPromtString
+			requestBody.Messages[0].Content += configJSON.Promt + " " + SupplementationPromtString + " " + fmt.Sprintf("YOU HAVE TO Answer the %s Language", configJSON.Language)
+
 	}
+
 
 	resultJSON, err := json.Marshal(requestBody)
 	if err != nil {
@@ -92,6 +81,14 @@ func Request(cod, SupplementationPromtString string, CustomPromt bool) error {
 	defer resp.Body.Close()
 	io.Copy(os.Stdout, resp.Body)
 
-	fmt.Println(string(body))
+	var Answer Answer
+
+	if err := json.NewDecoder(bytes.NewReader(body)).Decode(&Answer); err != nil {
+		fmt.Println("Error decoding JSON:", err)
+		return err
+	}
+
+	fmt.Println(Answer.Choices[0].Message.Content)
+
 	return nil
 }
