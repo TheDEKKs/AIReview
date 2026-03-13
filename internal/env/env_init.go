@@ -14,6 +14,6 @@ type Config struct {
 func (s *Config) Load() {
 	godotenv.Load()
 	if err := env.Parse(s); err != nil {
-		log.Fatal("couldn't load config: %s", err.Error())
+		log.Fatalf("couldn't load config: %s", err.Error())
 	}
 }
