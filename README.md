@@ -1,7 +1,10 @@
 # AIReview
 
 A tool that uses AI to review code and provide feedback about your code. This is project used free model from [openrouter.ai
-](https://openrouter.ai/).
+](https://openrouter.ai/)
+
+> [!NOTE]
+> Edit AI model you can in file `internal/api/promt.json`.
 
 ## Installation
 To install AIReview:
@@ -31,6 +34,8 @@ You can also use custom prompt from `config.json` and field `CustomPromt` by set
 ```bash
 ./aireview -cb <current_branch> -mb <main_branch> -o <output_file> -cp=true -sp "<supplementation_prompt"
 ```
+
+
 
 
 
