@@ -16,9 +16,9 @@ func Request(fileFormatOut, cod, SupplementationPromtString string, CustomPromt 
 
 	client := &http.Client{}
 
-ex, _ := os.Executable()
-dir := filepath.Dir(ex)
-path := filepath.Join(dir, "internal/api/promt.json")
+	ex, _ := os.Executable()
+ 	dir := filepath.Dir(ex)
+ 	path := filepath.Join(dir, "internal/api/promt.json")
 
 	jsonData, err := os.Open(path)
 	if err != nil {
