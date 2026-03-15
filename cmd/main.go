@@ -3,7 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
-	"thedekk/AIReview/internal/handlers"
+	"thedekk/AIReview/internal/cmd"
 )
 
 func main () {
@@ -19,7 +19,7 @@ func main () {
 	flag.Parse()
 
 
-	if err :=	handlers.Request(*CurrentBranch, *MainBranch, *CustomPromt, *OutFile, SupplementationPromtString); err != nil {
+	if err :=	cmd.Request(*CurrentBranch, *MainBranch, *CustomPromt, *OutFile, SupplementationPromtString); err != nil {
 		fmt.Println("Error:", err)
 	}
 }
