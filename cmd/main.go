@@ -15,7 +15,7 @@ func main () {
 	█─██─██─██─█─██─███───██─██─███─────█
 	█─██─█───█─█─██───██─██───█───██─█─██
 	█████████████████████████████████████`)
-	fmt.Println("Your code processing AI reviewing...")
+	fmt.Printf("\nYour code processing AI reviewing...")
 
 
 	CurrentBranch := flag.String("cb", "", "Current Branch")
