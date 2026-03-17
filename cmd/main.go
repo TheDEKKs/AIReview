@@ -7,7 +7,16 @@ import (
 )
 
 func main () {
-	fmt.Println("Hello, World!")
+	fmt.Println(`
+	█████████████████████████████████████
+	█────█───█────█───█─█─█───█───█─███─█
+	█─██─██─██─██─█─███─█─██─██─███─███─█
+	█────██─██────█───█─█─██─██───█─█─█─█
+	█─██─██─██─█─██─███───██─██─███─────█
+	█─██─█───█─█─██───██─██───█───██─█─██
+	█████████████████████████████████████`)
+	fmt.Println("Your code processing AI reviewing...")
+
 
 	CurrentBranch := flag.String("cb", "", "Current Branch")
 	MainBranch := flag.String("mb", "main", "Main Branch")
@@ -18,6 +27,10 @@ func main () {
 
 	flag.Parse()
 
+	if CurrentBranch == nil || *CurrentBranch == "" {
+		fmt.Println("Error: Current Branch is required")
+		return
+	}
 
 	if err :=	cmd.Request(*CurrentBranch, *MainBranch, *CustomPromt, *OutFile, SupplementationPromtString); err != nil {
 		fmt.Println("Error:", err)
