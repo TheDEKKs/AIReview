@@ -1,4 +1,8 @@
-# AIReview
+<div align="center">
+<h1>AIReview</h1>
+<img width="467" height="185" alt="изображение" src="https://github.com/user-attachments/assets/08859291-6cdf-4bcf-833f-3ee19761ed61" />
+</div>
+</br>
 
 A tool that uses AI to review code and provide feedback about your code. This is project used free model from [openrouter.ai
 ](https://openrouter.ai/)
