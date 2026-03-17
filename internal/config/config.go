@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"path/filepath"
 )
 
 type ConfigJSON struct {
@@ -13,10 +14,13 @@ type ConfigJSON struct {
 }
 
 func LoadConfig() (ConfigJSON, error) {
+ 	ex, _ := os.Executable()
+  dir := filepath.Dir(ex)
+	filePath := filepath.Join(dir, "config.json")
 	var config ConfigJSON
 
 	// Open
-	file, err := os.Open("config.json")
+	file, err := os.Open(filePath)
 	if err != nil {
 		fmt.Println("Error opening config file:", err)
 		return config, err

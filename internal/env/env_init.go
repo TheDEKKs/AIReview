@@ -14,11 +14,11 @@ type Config struct {
 
 
 func (s *Config) Load() {
-	ex, _ := os.Executable()
+		ex, _ := os.Executable()
     dir := filepath.Dir(ex)
-    
+
     godotenv.Load(filepath.Join(dir, ".env"))
-    
+
 	if err := env.Parse(s); err != nil {
 		log.Fatalf("couldn't load config: %s", err.Error())
 	}
